@@ -22,7 +22,18 @@ for ($i = 1; $i <= $ld; $i++) {
         $s .= "</tr><tr>";
         $y = 0;
     }
-    $s .= "<td>$i</td>";
+    switch ($y) {
+        case 0:
+            $s .= "<td class=\"sun\">$i</td>";
+            break;
+        case 6:
+            $s .= "<td class=\"sat\">$i</td>";
+            break;
+        default:
+            $s .= "<td>$i</td>";
+
+            break;
+    }
     $y++;
 }
 
@@ -46,6 +57,15 @@ $s .= "</tr></table>";
                 padding: 5px;
                 border: 1px solid #ccc;
                 text-align: right
+            }
+            td.sun{
+                color:  red;
+                font-weight: bold;
+            }
+            td.sat{
+                color:  blue;
+                font-weight: bold;
+                
             }
         </style>
     </head>
