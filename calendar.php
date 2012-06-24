@@ -8,7 +8,7 @@ $fd = date("w", strtotime("$year-$month-1"));
 $ld = date("t");
 
 
-$s = '<table><tr>';
+$s = '<tr>';
 
 $y = 0;
 
@@ -44,7 +44,6 @@ while ($r--) {
 }
 
 $s .= "</tr></table>";
-
 ?>
 
 <!DOCTYPE html>
@@ -58,20 +57,30 @@ $s .= "</tr></table>";
                 border: 1px solid #ccc;
                 text-align: right
             }
-            td.sun{
+            th.sun, td.sun{
                 color:  red;
                 font-weight: bold;
             }
-            td.sat{
+            th.sat, td.sat{
                 color:  blue;
                 font-weight: bold;
-                
+
             }
+            th{
+                padding: 5px;
+                border: 1px solid #ccc;
+                text-align: center;
+                background-color: #eee;
+            }
+
         </style>
     </head>
     <body>
         <h1>PHPの練習</h1>
-        <p><?php echo $year; ?>年<?php echo $month; ?>月</p>
-        <?php echo $s; ?>
+        <table>
+            <tr><th>←</th><th colspan="5"><?php echo $year; ?>年<?php echo $month; ?>月</th><th>→</th></tr>
+
+            <tr><th class="sun">日</th><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th class="sat">土</th></tr>
+            <?php echo $s; ?>
     </body>
 </html>
