@@ -1,11 +1,22 @@
 <?php
 // カレンダー
-$d = date("Y-m-d");
+$d = isset($_GET['d']) ? $_GET['d'] : date("Y-m-d");
 
 list($year, $month, $date) = explode("-", $d);
 
+if(!checkdate($month, $date, $year)) {
+    echo "不正な日付です";
+    exit;
+}
+
+
+$prev = date("Y-m-d", mktime(0,0,0, $month -1, 1, $year));
+$next = date("Y-m-d", mktime(0,0,0, $month +1, 1, $year));
+
+
+
 $fd = date("w", strtotime("$year-$month-1"));
-$ld = date("t");
+$ld = date("t", strtotime("$year-$month-1"));
 
 
 $s = '<tr>';
@@ -78,7 +89,7 @@ $s .= "</tr></table>";
     <body>
         <h1>PHPの練習</h1>
         <table>
-            <tr><th>←</th><th colspan="5"><?php echo $year; ?>年<?php echo $month; ?>月</th><th>→</th></tr>
+            <tr><th><a href="?d=<?php echo $prev ?>">←</th><th colspan="5"><?php echo htmlspecialchars($year); ?>年<?php echo htmlspecialchars($month); ?>月</th><th><a href="?d=<?php echo $next ?>">→</th></tr>
 
             <tr><th class="sun">日</th><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th class="sat">土</th></tr>
             <?php echo $s; ?>
